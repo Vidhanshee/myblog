@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	<div class="container text-center">
+	<h1 class="title">{{ post.title }}</h1>
+
+	<small>Posted at {{ post.date_added }}</small>
+    <p></p>
+	<p><strong>{{ post.intro }}</strong></p>
+		<p></p>
+	<p>{{ post.body }}</p>
+
+    <a href="{% url 'home' %}" class="btn btn-info" > Back </a>
+	</div>
+     <h4 class="subtitle">Comments</h4>
+
+{% for comment in post.comments.all %}
+	<article class="media">
+		<div class="media-content">
+			<div class="content">
+				<p>
+					<strong>{{ comment.name }}</strong> <small>{{ comment.date_added|timesince }} ago</small>
+					<br>
+					{{ comment.body }}
+				</p>
+			</div>
+		</div>
+	</article>
+{% empty %}
+	<div class="notification">
+		No comments yet...
+	</div>
+{% endfor %}
+<br>
+	<h4 class="subtitle">Add comment</h4>
+
+	<form method="post" action=".">
+		{% csrf_token %}
+
+		{{ form.as_p }}
+
+		<div class="field">
+			<div class="control">
+				<button class="btn btn-success">Submit</button>
+			</div>
+		</div>
+	</form>
+
+{% endblock %}
+

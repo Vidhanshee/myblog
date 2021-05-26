@@ -1,0 +1,44 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row" >
+<div class="col-sm-15">
+    {% if request.user.is_authenticated %}
+    <h3 class="my-5"> Welcome, {{ user.get_username }} </h3>
+    {% else %}
+    <h3 class="my-5"> Welcome, user</h3>
+    {% endif%}
+    <img src="{% static 'blog/images/blog_img.png' %}" class="rounded mx-auto d-block" alt="Responsive image">
+
+    <div class="jumbotron jumbotron-fluid ">
+         <div class="container text-center">
+         <h1 class="display-4 font-weight-bold">{{ latest.title }}</h1>
+             <p class="lead"> </p>
+             <small>{{ latest.date_added}}</small>
+             <p class="lead"> </p>
+         <p class="lead"> {{ latest.intro }}</p>
+          <p class="lead"> {{ latest.body }}</p>
+         </div>
+    </div>
+</div>
+</div>
+
+<div class ="row">
+ <p class="mb-3"> Read Latest Blog </p>
+{% for post in posts %}
+<div class="col-lg-3">
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <small>Posted at {{ post.date_added }}</small> <br>
+    <p class="card-text">{{ post.intro }}.</p>
+    <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
+  </div>
+</div>
+</div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

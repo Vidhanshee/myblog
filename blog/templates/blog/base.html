@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+    <title>myblog</title>
+    <style>
+        .footer {
+
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color: white;
+   text-align: center;
+}
+
+    </style>
+</head>
+<header>
+</header>
+<body>
+<div>
+   {% include 'blog/navbar.html' %}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% block msg %}
+            {% endblock msg %}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+     {% block side %}
+     {% endblock side %}
+
+     {% block content %}
+     {% endblock content %}
+</div>
+
+<footer class=" footer bg-dark p-2 my-3" >
+    <p class ="text-center text-white"> All rights reserved Blog App</p>
+</footer>
+<script src="{% static 'blog/js/jquerry.js' %}"></script>
+<script src="{% static 'blog/js/proper.js' %}"></script>
+<script src="{% static 'blog/js/bootstrap.js' %}"></script>
+    <nav class="navbar" >
+        <div></div>
+    </nav>
+</body>
+</html>
